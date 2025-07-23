@@ -8,9 +8,6 @@ class ElectronicProduct extends Product {
 
   favorite() {
     super.favorite();
-    console.log(
-      `전자제품 ${this._name}의 현재 좋아요 수는 ${this._favoriteCount}입니다.`
-    );
   }
 
   get manufacturer() {

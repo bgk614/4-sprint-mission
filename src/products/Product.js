@@ -54,9 +54,6 @@ class Product {
   }
   favorite() {
     this._favoriteCount++;
-    console.log(
-      `${this._name}의 현재 좋아요 수는 ${this._favoriteCount}입니다.`
-    );
   }
 }
 
