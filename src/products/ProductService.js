@@ -14,7 +14,7 @@ export const getProductList = async (params = {}) => {
     }
     return await res.json();
   } catch (err) {
-    console.err("[getProductList] Error:", err.message);
+    console.error("[getProductList] Error:", err.message);
     throw err;
   }
 };
