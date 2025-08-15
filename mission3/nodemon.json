@@ -1,0 +1,4 @@
+{
+  "watch": ["src", "path/to/yaml/files"],
+  "ext": "js,json,yaml,yml"
+}
