@@ -1,0 +1,8 @@
+/products:
+  $ref: ./products.yaml
+/products/{productId}:
+  $ref: ./product-by-id.yaml
+/articles:
+  $ref: ./articles.yaml
+/articles/{articleId}:
+  $ref: ./article-by-id.yaml

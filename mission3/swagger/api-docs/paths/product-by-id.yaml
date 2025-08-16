@@ -1,0 +1,106 @@
+get:
+  tags:
+    - product
+  summary: 상품 조회
+  operationId: getProductById
+  description: Returns a single product
+  parameters:
+    - name: productId
+      in: path
+      description: ID of product to return
+      required: true
+      schema:
+        type: integer
+        format: int64
+  responses:
+    '200':
+      description: (OK)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Product'
+    '204':
+      $ref: '#/components/responses/204NoContent'
+    '400':
+      $ref: '#/components/responses/400BadRequest'
+    '404':
+      $ref: '#/components/responses/404NotFound'
+    '500':
+      $ref: '#/components/responses/GenericError'
+patch:
+  tags:
+    - product
+  summary: 상품 수정
+  operationId: updateProduct
+  parameters:
+    - name: productId
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+            price:
+              type: integer
+            tags:
+              type: array
+              items:
+                type: string
+  responses:
+    '200':
+      description: (OK) 성공적으로 상품 수정됨
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Product'
+    '204':
+      $ref: '#/components/responses/204NoContent'
+    '404':
+      $ref: '#/components/responses/404NotFound'
+    '405':
+      $ref: '#/components/responses/405MethodNotAllowed'
+    '500':
+      $ref: '#/components/responses/GenericError'
+delete:
+  tags:
+    - product
+  summary: 상품 삭제
+  operationId: deleteProduct
+  parameters:
+    - name: productId
+      in: path
+      description: 삭제할 상품 ID
+      required: true
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: (OK)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Product deleted successfully
+    '202':
+      description: (Accepted)
+    '204':
+      $ref: '#/components/responses/204NoContent'
+    '404':
+      $ref: '#/components/responses/404NotFound'
+    '405':
+      $ref: '#/components/responses/405MethodNotAllowed'
+    '500':
+      $ref: '#/components/responses/GenericError'

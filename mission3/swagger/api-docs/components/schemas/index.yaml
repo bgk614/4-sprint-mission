@@ -1,0 +1,6 @@
+Error:
+  $ref: ./error.yaml
+Article:
+  $ref: ./article.yaml
+Product:
+  $ref: ./product.yaml
