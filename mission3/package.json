@@ -1,20 +1,25 @@
 {
   "dependencies": {
-    "@prisma/client": "^6.13.0",
+    "@prisma/client": "^6.14.0",
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "json-refs": "^3.0.15",
+    "prisma": "^6.14.0",
     "swagger-ui-express": "^5.0.1",
     "zod": "^4.0.17"
   },
   "devDependencies": {
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^9.2.0",
+    "js-yaml": "^4.1.0",
     "nodemon": "^3.1.10",
-    "prettier": "^3.6.2",
-    "prisma": "^6.13.0",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "prettier": "^3.6.2"
   },
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/app.js",
-    "start": "node src/app.js"
+    "dev": "concurrently \"nodemon src/app.js\" \"npm run watch:swagger\"",
+    "start": "node src/app.js",
+    "build:swagger": "node ./swagger/build-swagger.js",
+    "watch:swagger": "chokidar './swagger/api-docs/**/*.yaml' -c 'npm run build:swagger'"
   }
 }

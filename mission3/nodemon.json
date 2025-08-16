@@ -1,4 +1,5 @@
 {
-  "watch": ["src", "path/to/yaml/files"],
-  "ext": "js,json,yaml,yml"
+  "watch": ["src", ".env"],
+  "ext": "js, json",
+  "exec": "node src/app.js"
 }
