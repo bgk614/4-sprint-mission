@@ -1,3 +1,7 @@
+import prisma from '../../../prisma.js';
+
 export const getArticleService = async (id) => {
-  return articles.find((article) => article.id === id);
+  return await prisma.article.findUnique({
+    where: { id: Number(id) }
+  });
 };

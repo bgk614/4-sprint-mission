@@ -1,6 +1,11 @@
 import prisma from '../../../prisma.js';
 
-export const listProductsService = async ({ offset = 0, limit = 10, sort, search }) => {
+export const listProductsService = async ({
+  offset = 0,
+  limit = 10,
+  sort,
+  search
+}) => {
   const where = search
     ? {
         OR: [
@@ -10,7 +15,8 @@ export const listProductsService = async ({ offset = 0, limit = 10, sort, search
       }
     : {};
 
-  const orderBy = sort === 'recent' ? { createdAt: 'desc' } : undefined;
+  const orderBy =
+    sort === 'recent' ? { createdAt: 'desc' } : { createdAt: 'asc' };
 
   return await prisma.product.findMany({
     where,

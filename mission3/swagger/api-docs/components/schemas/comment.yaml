@@ -1,0 +1,16 @@
+type: object
+properties:
+  id:
+    type: integer
+    example: 1
+  content:
+    type: string
+    example: 댓글 내용
+  createdAt:
+    type: string
+    format: date-time
+    example: '2025-08-01T12:00:00Z'
+  updatedAt:
+    type: string
+    format: date-time
+    example: '2025-08-01T12:00:00Z'

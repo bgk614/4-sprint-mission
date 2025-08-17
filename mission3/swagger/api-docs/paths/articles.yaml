@@ -16,7 +16,7 @@ get:
         default: 10
     - name: offset
       in: query
-      description: 건너뛸 게시글 개수 (기본 0)
+      description: 건너뛸 개시글 개수 (기본 0)
       required: false
       schema:
         type: integer
@@ -29,10 +29,10 @@ get:
       schema:
         type: string
         enum: [recent, '']
-        default:
+        default: ''
     - name: search
       in: query
-      description: 게시글명 또는 설명에서 검색 키워드
+      description: 제목 또는 내용에서 검색 키워드
       required: false
       schema:
         type: string
@@ -45,7 +45,18 @@ get:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/Article'
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1
+                title:
+                  type: string
+                  example: 제목
+                createdAt:
+                  type: string
+                  format: date-time
+                  example: '2025-08-01T12:00:00Z'
     '400':
       $ref: '#/components/responses/400BadRequest'
     '404':
@@ -64,25 +75,15 @@ post:
         schema:
           type: object
           properties:
-            name:
-              description: '게시글 제목'
+            title:
+              description: '제목'
               type: string
-            description:
-              description: '게시글 설명'
+            content:
+              description: '내용'
               type: string
-            price:
-              description: '게시글 가격'
-              type: integer
-            tags:
-              description: '게시글 태그'
-              type: array
-              items:
-                type: string
           required:
-            - name
-            - description
-            - price
-            - tags
+            - title
+            - content
   responses:
     '201':
       description: (Created)

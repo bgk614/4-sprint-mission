@@ -5,13 +5,7 @@ get:
   operationId: getArticleById
   description: Returns a single article
   parameters:
-    - name: articleId
-      in: path
-      description: ID of article to return
-      required: true
-      schema:
-        type: integer
-        format: int64
+    - $ref: '#/components/parameters/articleId'
   responses:
     '200':
       description: 게시글 반환 성공
@@ -46,16 +40,10 @@ patch:
         schema:
           type: object
           properties:
-            name:
+            title:
               type: string
-            description:
+            content:
               type: string
-            price:
-              type: integer
-            tags:
-              type: array
-              items:
-                type: string
   responses:
     '200':
       description: 게시글 수정 성공

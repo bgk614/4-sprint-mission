@@ -5,38 +5,10 @@ get:
   operationId: getProductList
   description: Returns a product List
   parameters:
-    - name: limit
-      in: query
-      description: 조회할 상품 개수 (기본 10)
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 10
-    - name: offset
-      in: query
-      description: 건너뛸 상품 개수 (기본 0)
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    - name: sort
-      in: query
-      description: 정렬 기준. 'recent'면 최신순 정렬
-      required: false
-      schema:
-        type: string
-        enum: [recent, '']
-        default:
-    - name: search
-      in: query
-      description: 상품명 또는 설명에서 검색 키워드
-      required: false
-      schema:
-        type: string
-        default: ''
+    - $ref: '#/components/parameters/limit'
+    - $ref: '#/components/parameters/offset'
+    - $ref: '#/components/parameters/sort'
+    - $ref: '#/components/parameters/search'
   responses:
     '200':
       description: (OK) 성공적으로 상품 목록 반환
@@ -45,21 +17,7 @@ get:
           schema:
             type: array
             items:
-              type: object
-              properties:
-                id:
-                  type: integer
-                  example: 1
-                name:
-                  type: string
-                  example: 상품 이름
-                price:
-                  type: integer
-                  example: 100000
-                createdAt:
-                  type: string
-                  format: date-time
-                  example: '2025-08-01T12:00:00Z'
+              $ref: '#/components/schemas/Product'
     '400':
       $ref: '#/components/responses/400BadRequest'
     '404':

@@ -12,5 +12,5 @@ export const createProductSchema = z.object({
   price: z.number().min(0, { message: '상품 가격은 0 이상이어야 합니다.' }),
   tags: z.array(
     z.string().trim().min(1, { message: '태그는 비워둘 수 없습니다.' })
-  ),
+  )
 });

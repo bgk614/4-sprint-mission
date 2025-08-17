@@ -1,29 +1,32 @@
-export function listArticlesService({ offset = 0, limit = 10, sort, search }) {
-  let filtered = articles;
-  // 검색 기능
-  if (search) {
-    const keyword = search.toLowerCase();
-    filtered = filtered.filter(
-      (p) =>
-        p.title.toLowerCase().includes(keyword) ||
-        p.content.toLowerCase().includes(keyword)
-    );
-  }
+import prisma from '../../../prisma.js';
 
-  // 정렬 처리 (recent일 경우 최신순)
-  if (sort === 'recent') {
-    filtered = filtered.sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-    );
-  }
+export const listArticlesService = async ({
+  offset = 0,
+  limit = 10,
+  sort,
+  search
+}) => {
+  const where = search
+    ? {
+        OR: [
+          { title: { contains: search, mode: 'insensitive' } },
+          { content: { contains: search, mode: 'insensitive' } }
+        ]
+      }
+    : {};
 
-  // offset, limit 적용 (페이지네이션)
-  return filtered
-    .slice(offset, offset + limit)
-    .map(({ id, title, content, createdAt }) => ({
-      id,
-      title,
-      content,
-      createdAt,
-    }));
-}
+  const orderBy =
+    sort === 'recent' ? { createdAt: 'desc' } : { createdAt: 'asc' };
+
+  return await prisma.article.findMany({
+    where,
+    orderBy,
+    skip: offset,
+    take: limit,
+    select: {
+      id: true,
+      title: true,
+      createdAt: true
+    }
+  });
+};

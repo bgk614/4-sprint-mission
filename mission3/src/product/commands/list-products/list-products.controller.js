@@ -1,4 +1,3 @@
-// src/product/queries/list/list-products.controller.js
 import { asyncHandler } from '../../../utils/asyncHandler.js';
 import { listProductsService } from './list-products.service.js';
 

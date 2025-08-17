@@ -1,0 +1,7 @@
+name: id
+in: path
+required: true
+description: 게시글 ID
+schema:
+  type: integer
+  example: 1

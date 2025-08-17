@@ -1,4 +1,14 @@
-limitParam:
-  $ref: './limitParam.yaml'
-offsetParam:
-  $ref: './offsetParam.yaml'
+limit:
+  $ref: './limit.yaml'
+offset:
+  $ref: './offset.yaml'
+cursor:
+  $ref: './cursor.yaml'
+sort:
+  $ref: './sort.yaml'
+commentId:
+  $ref: './commentId.yaml'
+productId:
+  $ref: './productId.yaml'
+articleId:
+  $ref: './articleId.yaml'

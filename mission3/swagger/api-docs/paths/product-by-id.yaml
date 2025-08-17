@@ -3,15 +3,9 @@ get:
     - product
   summary: 상품 조회
   operationId: getProductById
-  description: Returns a single product
+  description: 상품 상세 조회
   parameters:
-    - name: productId
-      in: path
-      description: ID of product to return
-      required: true
-      schema:
-        type: integer
-        format: int64
+    - $ref: '#/components/parameters/productId'
   responses:
     '200':
       description: (OK)
@@ -33,12 +27,7 @@ patch:
   summary: 상품 수정
   operationId: updateProduct
   parameters:
-    - name: productId
-      in: path
-      required: true
-      schema:
-        type: integer
-        format: int64
+    - $ref: '#/components/parameters/productId'
   requestBody:
     required: true
     content:
@@ -77,23 +66,14 @@ delete:
   summary: 상품 삭제
   operationId: deleteProduct
   parameters:
-    - name: productId
-      in: path
-      description: 삭제할 상품 ID
-      required: true
-      schema:
-        type: integer
+    - $ref: '#/components/parameters/productId'
   responses:
     '200':
-      description: (OK)
+      description: (OK) 성공적으로 상품 삭제
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              message:
-                type: string
-                example: Product deleted successfully
+            $ref: '#/components/schemas/Product'
     '202':
       description: (Accepted)
     '204':

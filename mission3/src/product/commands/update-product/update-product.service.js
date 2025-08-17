@@ -4,7 +4,7 @@ export const updateProductService = async (productId, updateData) => {
   try {
     return await prisma.product.update({
       where: { id: Number(productId) },
-      data: updateData, // 업데이트할 필드들
+      data: updateData,
       select: {
         id: true,
         name: true,
@@ -17,7 +17,6 @@ export const updateProductService = async (productId, updateData) => {
     });
   } catch (err) {
     if (err.code === 'P2025') {
-      // 해당 ID 상품 없음
       return null;
     }
     throw err;

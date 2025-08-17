@@ -4,3 +4,9 @@ Article:
   $ref: ./article.yaml
 Product:
   $ref: ./product.yaml
+Comment:
+  $ref: ./comment.yaml
+CreateComment:
+  $ref: ./create-comment.yaml
+UpadateComment:
+  $ref: ./update-comment.yaml
