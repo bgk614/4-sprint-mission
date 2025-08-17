@@ -30,7 +30,7 @@ productRouter
   .post(validateBody(createProductSchema), createProductController);
 
 productRouter
-  .route('/:id')
+  .route('/:productId')
   .get(validateParams(getProductSchema), getProductController)
   .patch(
     validateParams(getProductSchema),
@@ -40,7 +40,7 @@ productRouter
   .delete(validateParams(deleteProductSchema), deleteProductController);
 
   productRouter
-    .route('/:id/comments')
+    .route('/:productId/comments')
     .get(
       validateParams(getProductSchema),
       validateQuery(listCommentsSchema), 

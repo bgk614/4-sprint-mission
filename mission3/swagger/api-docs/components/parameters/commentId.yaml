@@ -1,4 +1,4 @@
-name: id
+name: commentId
 in: path
 required: true
 description: 댓글 ID

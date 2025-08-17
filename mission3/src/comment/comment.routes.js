@@ -19,7 +19,7 @@ import { validateBody, validateQuery, validateParams } from '../utils/index.js';
 export const commentRouter = express.Router();
 
 commentRouter
-  .route('/:id')
+  .route('/:commentId')
   .patch(
     validateParams(getCommentSchema),
     validateBody(updateCommentSchema),

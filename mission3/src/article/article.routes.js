@@ -30,7 +30,7 @@ articleRouter
   .post(validateBody(createArticleSchema), createArticleController);
 
 articleRouter
-  .route('/:id')
+  .route('/:articleId')
   .get(validateParams(getArticleSchema), getArticleController)
   .patch(
     validateParams(getArticleSchema),
@@ -40,7 +40,7 @@ articleRouter
   .delete(validateParams(deleteArticleSchema), deleteArticleController);
 
 articleRouter
-  .route('/:id/comments')
+  .route('/:articleId/comments')
   .get(
     validateParams(getArticleSchema),
     validateQuery(listCommentsSchema),

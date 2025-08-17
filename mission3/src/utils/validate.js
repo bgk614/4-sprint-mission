@@ -3,7 +3,8 @@ import { AppError } from './AppError.js';
 
 const toAppError = (err) =>
   new AppError('요청 검증 실패', 400, {
-    details: err.issues?.map((e) => ({ path: e.path, message: e.message })) ?? [],
+    details:
+      err.issues?.map((e) => ({ path: e.path, message: e.message })) ?? []
   });
 
 export const validateBody = (schema) => (req, _res, next) => {
