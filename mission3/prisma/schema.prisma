@@ -8,30 +8,30 @@ generator client {
 }
 
 model Product {
-  id          Int       @id @default(autoincrement())
-  name        String
-  description String
-  price       Int
-  tags        String[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  userComments    UserComment[]
+  id           Int           @id @default(autoincrement())
+  name         String
+  description  String
+  price        Int
+  tags         String[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  userComments UserComment[]
 }
 
 model Article {
-  id        Int       @id @default(autoincrement())
-  title     String
-  content   String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  userComments  UserComment[]
+  id           Int           @id @default(autoincrement())
+  title        String
+  content      String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  userComments UserComment[]
 }
 
 model UserComment {
   id        Int      @id @default(autoincrement())
   content   String
   createdAt DateTime @default(now())
-  updatedAt DateTime  @updatedAt
+  updatedAt DateTime @updatedAt
   productId Int?
   product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
   articleId Int?

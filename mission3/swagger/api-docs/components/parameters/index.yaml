@@ -6,6 +6,8 @@ cursor:
   $ref: './cursor.yaml'
 sort:
   $ref: './sort.yaml'
+search:
+  $ref: './serch.yaml'
 commentId:
   $ref: './commentId.yaml'
 productId:

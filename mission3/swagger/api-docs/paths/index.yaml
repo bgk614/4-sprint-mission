@@ -12,3 +12,5 @@
   $ref: ./article-comments.yaml
 /comments/{commentId}:
   $ref: ./comment-by-id.yaml
+/uploads/image:
+  $ref: ./images.yaml
