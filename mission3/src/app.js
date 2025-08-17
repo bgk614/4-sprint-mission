@@ -27,6 +27,7 @@ swaggerDocument.servers = swaggerDocument.servers.map((server) => {
 app.use(cors());
 app.use(express.json());
 
+app.use('/uploads', express.static('uploads'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/products', productRouter);
