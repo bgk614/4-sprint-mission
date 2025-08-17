@@ -15,7 +15,7 @@ export const listCommentsService = async ({
     where,
     take: limit,
     ...(cursor ? { skip: 1, cursor: { id: cursor } } : {}),
-    orderBy: { createdAt: 'desc' },
+    orderBy: { id: 'desc' },
     select: { id: true, content: true, createdAt: true }
   });
 };

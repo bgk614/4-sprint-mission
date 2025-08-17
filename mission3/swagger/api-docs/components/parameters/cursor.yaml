@@ -4,4 +4,4 @@ required: false
 description: 다음 페이지를 위한 커서 (마지막 댓글 ID)
 schema:
   type: integer
-  example: 15
+  example: 0

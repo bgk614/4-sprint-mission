@@ -47,16 +47,7 @@ get:
             items:
               type: object
               properties:
-                id:
-                  type: integer
-                  example: 1
-                title:
-                  type: string
-                  example: 제목
-                createdAt:
-                  type: string
-                  format: date-time
-                  example: '2025-08-01T12:00:00Z'
+                $ref: '#/components/schemas/Article'
     '400':
       $ref: '#/components/responses/400BadRequest'
     '404':
