@@ -1,6 +1,6 @@
 import { deleteProductService } from './index.js';
-import { AppError } from '../../../utils/index.js';
-import { asyncHandler } from '../../../utils/index.js';
+import { AppError } from '../../../shared/index.js';
+import { asyncHandler } from '../../../shared/index.js';
 
 export const deleteProductController = asyncHandler(async (req, res) => {
   const { productId } = req.validatedParams;

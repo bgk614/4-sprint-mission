@@ -1,5 +1,5 @@
 import { createArticleService } from './index.js';
-import { asyncHandler } from '../../../utils/index.js';
+import { asyncHandler } from '../../../shared/index.js';
 
 export const createArticleController = asyncHandler(async (req, res) => {
   const created_article = await createArticleService(req.validatedBody);

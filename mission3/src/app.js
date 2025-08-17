@@ -7,7 +7,7 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import { productRouter } from './product/product.routes.js';
 import { articleRouter } from './article/article.routes.js';
 import { commentRouter } from './comment/comment.routes.js';
-import { uploadRouter } from './utils/uploads.routes.js';
+import { uploadRouter } from './shared/uploads.routes.js';
 
 import swaggerDocument from './docs/openapi-resolved.json' with { type: 'json' };
 

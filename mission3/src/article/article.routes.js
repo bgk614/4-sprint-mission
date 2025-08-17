@@ -20,7 +20,11 @@ import {
   createCommentSchema
 } from '../comment/commands/index.js';
 
-import { validateBody, validateQuery, validateParams } from '../utils/index.js';
+import {
+  validateBody,
+  validateQuery,
+  validateParams
+} from '../shared/index.js';
 
 export const articleRouter = express.Router();
 

@@ -1,5 +1,5 @@
 // src/article/queries/list/list-articles.controller.js
-import { asyncHandler } from '../../../utils/asyncHandler.js';
+import { asyncHandler } from '../../../shared/asyncHandler.js';
 import { listArticlesService } from './list-articles.service.js';
 
 export const listArticlesController = asyncHandler(async (req, res) => {

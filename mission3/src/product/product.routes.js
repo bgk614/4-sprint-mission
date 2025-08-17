@@ -20,7 +20,11 @@ import {
   listCommentsSchema
 } from '../comment/commands/index.js';
 
-import { validateBody, validateQuery, validateParams } from '../utils/index.js';
+import {
+  validateBody,
+  validateQuery,
+  validateParams
+} from '../shared/index.js';
 
 export const productRouter = express.Router();
 
@@ -39,11 +43,11 @@ productRouter
   )
   .delete(validateParams(deleteProductSchema), deleteProductController);
 
-  productRouter
-    .route('/:productId/comments')
-    .get(
-      validateParams(getProductSchema),
-      validateQuery(listCommentsSchema), 
-      listProductCommentsController
-    )
-    .post(validateBody(createCommentSchema), createCommentController);
+productRouter
+  .route('/:productId/comments')
+  .get(
+    validateParams(getProductSchema),
+    validateQuery(listCommentsSchema),
+    listProductCommentsController
+  )
+  .post(validateBody(createCommentSchema), createCommentController);

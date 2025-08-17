@@ -1,4 +1,4 @@
-import { asyncHandler } from '../../../utils/asyncHandler.js';
+import { asyncHandler } from '../../../shared/asyncHandler.js';
 import { listCommentsService } from './list-comments.service.js';
 
 export const listArticleCommentsController = asyncHandler(async (req, res) => {
@@ -11,6 +11,6 @@ export const listArticleCommentsController = asyncHandler(async (req, res) => {
     cursor,
     limit
   });
-  
+
   res.json(comments);
 });

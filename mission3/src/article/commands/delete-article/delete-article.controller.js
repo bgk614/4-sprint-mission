@@ -1,6 +1,6 @@
 import { deleteArticleService } from './index.js';
-import { AppError } from '../../../utils/index.js';
-import { asyncHandler } from '../../../utils/index.js';
+import { AppError } from '../../../shared/index.js';
+import { asyncHandler } from '../../../shared/index.js';
 
 export const deleteArticleController = asyncHandler(async (req, res) => {
   const { articleId } = req.validatedParams;

@@ -1,6 +1,6 @@
 // src/comment/commands/update/update-comment.controller.js
-import { asyncHandler } from '../../../utils/asyncHandler.js';
-import { AppError } from '../../../utils/AppError.js';
+import { asyncHandler } from '../../../shared/asyncHandler.js';
+import { AppError } from '../../../shared/AppError.js';
 import { updateCommentService } from './update-comment.service.js';
 
 export const updateCommentController = asyncHandler(async (req, res) => {

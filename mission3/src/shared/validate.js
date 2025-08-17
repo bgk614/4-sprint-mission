@@ -1,4 +1,4 @@
-// src/utils/validate.js
+// src/shared/validate.js
 import { AppError } from './AppError.js';
 
 const toAppError = (err) =>

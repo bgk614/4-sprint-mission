@@ -1,6 +1,6 @@
 import { getProductService } from './get-product.service.js';
-import { AppError } from '../../../utils/AppError.js';
-import { asyncHandler } from '../../../utils/asyncHandler.js';
+import { AppError } from '../../../shared/AppError.js';
+import { asyncHandler } from '../../../shared/asyncHandler.js';
 
 export const getProductController = asyncHandler(async (req, res) => {
   const { productId } = req.validatedParams;

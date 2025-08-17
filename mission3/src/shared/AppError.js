@@ -1,4 +1,4 @@
-// src/utils/AppError.js
+// src/shared/AppError.js
 export class AppError extends Error {
   constructor(message, statusCode = 500, extras = {}) {
     super(message);

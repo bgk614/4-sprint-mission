@@ -14,7 +14,11 @@ import {
   deleteCommentSchema
 } from './commands/index.js';
 
-import { validateBody, validateQuery, validateParams } from '../utils/index.js';
+import {
+  validateBody,
+  validateQuery,
+  validateParams
+} from '../shared/index.js';
 
 export const commentRouter = express.Router();
 
