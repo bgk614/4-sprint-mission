@@ -4,4 +4,5 @@ required: true
 description: 게시글 ID
 schema:
   type: integer
+  minimum: 1
   example: 1
