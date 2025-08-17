@@ -16,6 +16,14 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 1000;
 
+const SERVER_URL = process.env.SERVER_URL || `http://localhost:${PORT}`;
+swaggerDocument.servers = swaggerDocument.servers.map((server) => {
+  if (server.url === 'SERVER_URL') {
+    return { ...server, url: SERVER_URL };
+  }
+  return server;
+});
+
 app.use(cors());
 app.use(express.json());
 

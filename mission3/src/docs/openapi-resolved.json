@@ -7,12 +7,12 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000",
-      "description": "로컬 서버"
+      "url": "SERVER_URL",
+      "description": "Render 서버"
     },
     {
-      "url": "https://api.myproject.com",
-      "description": "원격 서버"
+      "url": "http://localhost:3000",
+      "description": "로컬 서버"
     }
   ],
   "tags": {
