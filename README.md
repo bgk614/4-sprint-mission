@@ -1,11 +1,3 @@
-# 스프린트 미션 2
-> 2025.07.14 - 2025.07.27   
-> JavaScript, Node.js
-### 내용
-> API 리퀘스트 보내는 코드 구현
-> Git과 Github 활용
-
-##### 실행
-```
-node --env-file=.env src/main.js;
-```
+코드잇 부트캠프 Node.js 과제<br>
+[Mission 2](mission2/README.md)<br>
+[Mission 3](mission3/README.md)<br>
