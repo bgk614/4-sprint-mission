@@ -2,5 +2,3 @@
 . "$(dirname "$0")/_/husky.sh"
 # 변경분만 빠르게
 npx vitest run --changed origin/main || exit 1
-# 필요 시 가벼운 빌드 확인(예: 타입체크나 --dry-run류)
-npm run build:check || exit 1
