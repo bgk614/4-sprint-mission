@@ -3,7 +3,7 @@ const { PORT } = process.env;
 
 const port = PORT || 3000;
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.send('API is up and running');
 });
 
