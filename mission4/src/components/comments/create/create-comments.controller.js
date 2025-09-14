@@ -1,18 +1,18 @@
+import { AppError } from '../../../utils/app-error.js';
+import { ErrorCodes } from '../../../utils/error-codes.js';
 import { createCommentService } from './create-comments.service.js';
 
 export const createCommentController = async (req, res, next) => {
   try {
-    if (!req.user) {
-      return res.status(401).json({ message: 'Unauthorized' });
-    }
+    if (!req.user) throw new AppError({ ...ErrorCodes.UNAUTHORIZED, path: req.originalUrl });
 
-    const { content, articleId, productId } = res.locals.validated;
+    const { body, params } = res.locals.validated;
 
     const comment = await createCommentService({
-      content,
+      content: body.content,
       authorId: req.user.id,
-      articleId: articleId || null,
-      productId: productId || null,
+      articleId: params.articleId || null,
+      productId: params.productId || null,
     });
 
     res.status(201).json(comment);
