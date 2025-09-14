@@ -25,7 +25,7 @@ export const deleteCommentController = async (req, res, next) => {
     const { params } = res.locals['validated'];
 
     await deleteCommentService({
-      commentId: Number(params.id),
+      commentId: Number(params.commentId),
       userId: req.user.id,
     });
 

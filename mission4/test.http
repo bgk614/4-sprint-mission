@@ -1,6 +1,6 @@
 # 로그인 후 발급된 토큰
-@access-token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJpYXQiOjE3NTc4Nzg0MTUsImV4cCI6MTc1Nzg4MjAxNX0.EfVGyeSEoDH2Bvmg4-INZTezgSPcyuEPdJRQh019YkE
-@refresh-token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJpYXQiOjE3NTc4Nzg0MTUsImV4cCI6MTc1Nzg4MjAxNX0.EfVGyeSEoDH2Bvmg4-INZTezgSPcyuEPdJRQh019YkE
+@access-token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJpYXQiOjE3NTc4ODc2NDksImV4cCI6MTc1Nzg5MTI0OX0.sY32aRRGNgZ6PE_cZOyF0Ogw3Z1lzmTz3lInCNegr68
+@refresh-token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJpYXQiOjE3NTc4ODc2NDksImV4cCI6MTc1Nzg5MTI0OX0.sY32aRRGNgZ6PE_cZOyF0Ogw3Z1lzmTz3lInCNegr68
 
 # ================================
 # Auth & User
@@ -22,7 +22,7 @@ Content-Type: application/json
 
 {
   "email": "test@test2.com",
-  "password": "00001111"
+  "password": "00002222"
 }
 
 ### 로그아웃
@@ -110,12 +110,13 @@ DELETE http://localhost:3000/products/3
 Authorization: Bearer {{access-token}}
 
 ### 상품 댓글 등록
-POST http://localhost:3000/products/3/comments
+POST http://localhost:3000/products/4/comments
 Authorization: Bearer {{access-token}}
 Content-Type: application/json
 
 {
   "content": "상품댓글1"
+
 }
 
 ### 상품 좋아요 토글
@@ -141,7 +142,7 @@ Content-Type: application/json
 }
 
 ### 게시글 수정
-PATCH http://localhost:3000/articles/4
+PATCH http://localhost:3000/articles/7
 Authorization: Bearer {{access-token}}
 Content-Type: application/json
 
@@ -151,11 +152,11 @@ Content-Type: application/json
 }
 
 ### 게시글 삭제
-DELETE http://localhost:3000/articles/3
+DELETE http://localhost:3000/articles/7
 Authorization: Bearer {{access-token}}
 
 ### 게시글 댓글 등록
-POST http://localhost:3000/articles/3/comments
+POST http://localhost:3000/articles/7/comments
 Authorization: Bearer {{access-token}}
 Content-Type: application/json
 
@@ -164,7 +165,7 @@ Content-Type: application/json
 }
 
 ### 게시글 좋아요 토글
-POST http://localhost:3000/likes/articles/4
+POST http://localhost:3000/likes/articles/7
 Authorization: Bearer {{access-token}}
 
 # ================================
@@ -172,7 +173,7 @@ Authorization: Bearer {{access-token}}
 # ================================
 
 ### 댓글 수정
-PATCH http://localhost:3000/comments/1
+PATCH http://localhost:3000/comments/6
 Authorization: Bearer {{access-token}}
 Content-Type: application/json
 
@@ -181,5 +182,5 @@ Content-Type: application/json
 }
 
 ### 댓글 삭제
-DELETE http://localhost:3000/comments/1
+DELETE http://localhost:3000/comments/6
 Authorization: Bearer {{access-token}}
