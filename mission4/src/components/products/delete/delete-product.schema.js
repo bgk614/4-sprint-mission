@@ -5,7 +5,7 @@ import { z } from 'zod';
  *
  * - params.productId: 숫자 필수
  */
-export const deleteArticleSchema = z.object({
+export const deleteProductSchema = z.object({
   params: z.object({
     productId: z.string().regex(/^\d+$/, 'productId는 숫자여야 합니다.'),
   }),

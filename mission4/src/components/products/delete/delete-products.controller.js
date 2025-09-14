@@ -14,6 +14,7 @@ import { deleteProductService } from './delete-products.service.js';
  * @throws {ValidationError} - 요청 데이터 검증 실패 시
  * @throws {AppError} - 권한 없음 403 Forbidden
  */
+
 export const deleteProductController = async (req, res, next) => {
   try {
     const { productId } = res.locals.validated.params;

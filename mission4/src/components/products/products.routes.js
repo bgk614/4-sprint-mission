@@ -7,6 +7,8 @@ import { authenticate } from '../../middlewares/authenticate.js';
 import { validate } from '../../middlewares/validate.js';
 import { createProductController } from './create/create-products.controller.js';
 import { createProductSchema } from './create/create-products.schema.js';
+import { deleteProductSchema } from './delete/delete-product.schema.js';
+import { deleteProductController } from './delete/delete-products.controller.js';
 import { getProductsController } from './get/get-products.controller.js';
 import { updateProductController } from './update/update-products.controller.js';
 import { updateProductSchema } from './update/update-products.schema.js';
@@ -22,7 +24,7 @@ productRouter
   .route('/:productId')
   //   .get() // 상품 정보 상세 조회
   .patch(authenticate, validate(updateProductSchema), updateProductController) // 상품 정보 수정
-  .delete(); // 상품 삭제
+  .delete(authenticate, validate(deleteProductSchema), deleteProductController); // 상품 삭제
 
 // productRouter
 //   .route('/:productId/comments')
