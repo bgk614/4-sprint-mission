@@ -8,23 +8,23 @@
   "description": "Codeit BootCamp 2025 Node04 Sprint Mission 4 20250903 - 20250914",
   "type": "module",
   "scripts": {
-    "dev": "node --env-file=.env --watch --loader tsx src/server.ts",
-    "build": "tsc -p tsconfig.json",
-    "start": "node --env-file=.env dist/server.js",
-    "lint": "eslint . --ext .ts",
+    "dev": "nodemon --env-file=.env src/index.js",
+    "start": "node --env-file=.env src/index.js",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
     "format": "prettier --write .",
-    "test": "node --env-file=.env vitest run",
+    "vitest": "node --env-file=.env ./node_modules/vitest/vitest.mjs",
+    "test": "npx vitest run",
     "test:watch": "node --env-file=.env vitest",
     "prepare": "simple-git-hooks"
   },
   "simple-git-hooks": {
     "pre-commit": [
-      "npm run lint-staged",
-      "npm run type-check"
+      "npm run lint-staged"
     ]
   },
   "lint-staged": {
-    "*.{js.ts}": [
+    "*.{js}": [
       "npm run lint --fix",
       "prettier --write"
     ],
@@ -34,12 +34,15 @@
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",
-    "argon2": "^0.44.0",
+    "bcryptjs": "^3.0.2",
     "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "express-rate-limit": "^8.0.1",
     "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.10",
     "pino": "^9.9.0",
     "pino-http": "^10.5.0",
     "pino-pretty": "^13.1.1",
@@ -47,17 +50,13 @@
     "zod": "^4.1.5"
   },
   "devDependencies": {
-    "@types/express": "^5.0.3",
-    "@types/node": "^24.3.0",
-    "@typescript-eslint/eslint-plugin": "^8.42.0",
-    "@typescript-eslint/parser": "^8.42.0",
     "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "husky": "^9.1.7",
     "prettier": "^3.6.2",
     "supertest": "^7.1.4",
-    "tsx": "^4.20.5",
-    "typescript": "^5.9.2",
     "vite": "^7.1.4",
     "vitest": "^3.2.4"
   }

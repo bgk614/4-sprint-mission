@@ -1,9 +1,19 @@
 {
+  "printWidth": 120,
   "singleQuote": true,
-  "jsxSingleQuote": true,
-  "trailingComma": "es5",
   "tabWidth": 2,
-  "semi": true,
   "useTabs": false,
-  "printWidth": 120
+  "trailingComma": "all",
+  "jsxSingleQuote": true,
+  "bracketSpacing": true,
+  "semi": true,
+  "endOfLine": "lf",
+  "overrides": [
+    {
+      "files": ["*.json"],
+      "options": {
+        "printWidth": 1000
+      }
+    }
+  ]
 }
