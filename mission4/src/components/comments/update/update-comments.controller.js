@@ -1,4 +1,4 @@
-import { prisma } from '../../../config/prisma.js';
+import prisma from '../../../config/prisma.js';
 import { AppError } from '../../../utils/app-error.js';
 
 export const updateCommentController = async (req, res, next) => {
