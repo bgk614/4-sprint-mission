@@ -2,12 +2,17 @@ import { createCommentService } from './create-comments.service.js';
 
 export const createCommentController = async (req, res, next) => {
   try {
-    const { body, params } = res.locals.validated;
+    if (!req.user) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const { content, articleId, productId } = res.locals.validated;
+
     const comment = await createCommentService({
-      content: body.content,
+      content,
       authorId: req.user.id,
-      articleId: params.articleId || null,
-      productId: params.productId || null,
+      articleId: articleId || null,
+      productId: productId || null,
     });
 
     res.status(201).json(comment);
