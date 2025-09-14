@@ -5,7 +5,7 @@ export const updateUserPasswordController = async (req, res, next) => {
   try {
     if (!req.user) throw new AppError(401, 'UNAUTHORIZED', '로그인이 필요합니다.');
 
-    const { currentPassword, newPassword } = req.locals.validated.body;
+    const { currentPassword, newPassword } = res.locals.validated.body;
 
     const updatedUser = await updateUserPasswordService(req.user.id, currentPassword, newPassword);
 

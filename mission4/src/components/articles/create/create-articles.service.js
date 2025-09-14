@@ -1,5 +1,6 @@
 import prisma from '../../../config/prisma.js';
 import { AppError } from '../../../utils/app-error.js';
+import { ErrorCodes } from '../../../utils/error-codes.js';
 
 /**
  * 게시글 생성
@@ -17,7 +18,13 @@ export async function createArticleService(input) {
       },
       select: { id: true, title: true, content: true, authorId: true },
     });
-  } catch {
-    throw new AppError(404, 'USER_NOT_FOUND', '해당 사용자가 존재하지 않습니다.');
+  } catch (err) {
+    // Prisma 에러 매핑
+    if (err.code === 'P2025') {
+      // 연결할 유저가 없을 때
+      throw new AppError({ ...ErrorCodes.USER_NOT_FOUND, details: err.meta });
+    }
+    // 그 외 에러는 그대로 던짐 → 전역 errorHandler에서 처리
+    throw err;
   }
 }

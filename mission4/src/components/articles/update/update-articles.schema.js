@@ -9,7 +9,7 @@ import { z } from 'zod';
  */
 export const updateArticleSchema = z.object({
   params: z.object({
-    articleId: z.string().regex(/^\d+$/, 'articleId는 숫자여야 합니다.'),
+    articleId: z.coerce.number().int().positive(),
   }),
   body: z.object({
     title: z.string().min(1, '제목은 필수입니다.'),

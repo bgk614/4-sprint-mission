@@ -5,6 +5,8 @@ import express from 'express';
 
 import { authenticate } from '../../middlewares/authenticate.js';
 import { validate } from '../../middlewares/validate.js';
+import { createCommentController } from '../comments/create/create-comments.controller.js';
+import { createCommentSchema } from '../comments/create/create-comments.schema.js';
 import { createProductController } from './create/create-products.controller.js';
 import { createProductSchema } from './create/create-products.schema.js';
 import { deleteProductSchema } from './delete/delete-product.schema.js';
@@ -26,7 +28,5 @@ productRouter
   .patch(authenticate, validate(updateProductSchema), updateProductController) // 상품 정보 수정
   .delete(authenticate, validate(deleteProductSchema), deleteProductController); // 상품 삭제
 
-// productRouter
-//   .route('/:productId/comments')
-//   .post() // 상품 댓글 작성
+productRouter.route('/:productId/comments').post(authenticate, validate(createCommentSchema), createCommentController); // 게시글 댓글 작성
 //   .get(); // 상품 댓글 조회

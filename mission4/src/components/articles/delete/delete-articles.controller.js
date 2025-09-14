@@ -24,7 +24,7 @@ export const deleteArticleController = async (req, res, next) => {
     const { params } = res.locals['validated'];
 
     await deleteArticleService({
-      articleId: Number(params.id),
+      articleId: Number(params.articleId),
       userId: req.user.id,
     });
 

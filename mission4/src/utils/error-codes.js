@@ -13,11 +13,9 @@ export const ErrorCodes = {
 
   // 인가 관련
   FORBIDDEN: { status: 403, code: 403101, message: '권한 없음' },
-  ADMIN_REQUIRED: { status: 403, code: 403102, message: '관리자 권한 필요' },
 
   // 상품
   PRODUCT_NOT_FOUND: { status: 404, code: 404101, message: '상품 없음' },
-  PRODUCT_DUPLICATE: { status: 409, code: 409101, message: '상품 중복 등록' },
 
   // 게시글
   POST_NOT_FOUND: { status: 404, code: 404201, message: '게시글 없음' },
@@ -28,11 +26,8 @@ export const ErrorCodes = {
   // 유저
   USER_NOT_FOUND: { status: 404, code: 404401, message: '유저 없음' },
   PASSWORD_INVALID: { status: 400, code: 400401, message: '유효하지 않은 비밀번호' },
-  PASSWORD_MISMATCH: { status: 400, code: 400402, message: '새 비밀번호 불일치' },
 
   // 좋아요
-  LIKE_ALREADY_EXISTS: { status: 400, code: 400501, message: '이미 좋아요 누름' },
-  LIKE_NOT_FOUND: { status: 400, code: 400502, message: '좋아요 기록 없음' },
   LIKE_TARGET_NOT_FOUND: { status: 404, code: 404501, message: '좋아요 대상 없음' },
 
   // 서버/DB

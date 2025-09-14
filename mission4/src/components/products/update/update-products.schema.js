@@ -11,7 +11,7 @@ import { z } from 'zod';
  */
 export const updateProductSchema = z.object({
   params: z.object({
-    productId: z.string().regex(/^\d+$/, 'productId는 숫자여야 합니다.'),
+    productId: z.coerce.number().int().positive(), // 문자열이라도 숫자로 변환, 정수, 양수 검증
   }),
   body: z.object({
     name: z.string().min(1).max(255).optional(),

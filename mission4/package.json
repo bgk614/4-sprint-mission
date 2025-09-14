@@ -10,23 +10,18 @@
   "scripts": {
     "dev": "nodemon --env-file=.env src/index.js",
     "start": "node --env-file=.env src/index.js",
-    "lint": "eslint . --ext .js",
-    "lint:fix": "eslint . --ext .js --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "vitest": "node --env-file=.env ./node_modules/vitest/vitest.mjs",
     "test": "npx vitest run",
     "test:watch": "node --env-file=.env vitest",
-    "prepare": "simple-git-hooks"
-  },
-  "simple-git-hooks": {
-    "pre-commit": [
-      "npm run lint-staged"
-    ]
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js}": [
-      "npm run lint --fix",
-      "prettier --write"
+      "eslint . --fix",
+      "prettier --write ."
     ],
     "prisma/schema.prisma": [
       "npx prisma format"

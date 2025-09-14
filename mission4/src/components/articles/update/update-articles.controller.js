@@ -24,7 +24,7 @@ export const updateArticleController = async (req, res, next) => {
     const { params, body } = res.locals['validated'];
 
     const updated = await updateArticleService({
-      articleId: Number(params.id),
+      articleId: Number(params.articleId),
       userId: req.user.id,
       title: body.title,
       content: body.content,

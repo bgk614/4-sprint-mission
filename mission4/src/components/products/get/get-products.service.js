@@ -5,6 +5,7 @@ import prisma from '../../../config/prisma.js';
  * @param {number} userId - 로그인한 유저 ID
  * @returns 상품 배열
  */
+
 export const getProductsService = async (userId) => {
   const products = await prisma.product.findMany({
     include: {

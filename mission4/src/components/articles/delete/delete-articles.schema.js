@@ -7,7 +7,7 @@ import { z } from 'zod';
  */
 export const deleteArticleSchema = z.object({
   params: z.object({
-    articleId: z.string().regex(/^\d+$/, 'articleId는 숫자여야 합니다.'),
+    articleId: z.coerce.number().int().positive(),
   }),
   body: z.object({}).optional(),
   query: z.object({}).optional(),
