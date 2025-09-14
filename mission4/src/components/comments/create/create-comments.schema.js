@@ -10,8 +10,8 @@ export const createCommentSchema = z.object({
   body: z
     .object({
       content: z.string().min(1).max(5000),
-      articleId: z.number().int().positive().optional(),
-      productId: z.number().int().positive().optional(),
+      articleId: z.coerce.number().int().positive().optional(),
+      productId: z.coerce.number().int().positive().optional(),
     })
     .refine(
       (data) => data.articleId || data.productId,
