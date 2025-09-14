@@ -1,8 +1,8 @@
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 
 import prisma from '../../../config/prisma.js';
 
-export async function createUserService(email, nickname, password) {
+export async function createUserService(email, nickname, password, image) {
   // 비밀번호 해싱
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -12,12 +12,14 @@ export async function createUserService(email, nickname, password) {
       email,
       nickname,
       password: hashedPassword,
+      image,
     },
     select: {
       id: true,
       email: true,
       nickname: true,
       createdAt: true,
+      image: true,
     },
   });
 
