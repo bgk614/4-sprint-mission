@@ -18,15 +18,9 @@
     "test:watch": "node --env-file=.env vitest",
     "prepare": "husky install"
   },
-  "lint-staged": {
-    "*.{js}": [
-      "eslint . --fix",
-      "prettier --write ."
-    ],
-    "prisma/schema.prisma": [
-      "npx prisma format"
-    ]
-  },
+  "prisma/schema.prisma": [
+    "npx prisma format"
+  ],
   "dependencies": {
     "@prisma/client": "^6.15.0",
     "bcrypt": "^6.0.0",
@@ -41,7 +35,6 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "husky": "^9.1.7",
     "prettier": "^3.6.2"
   }
 }
