@@ -15,8 +15,7 @@
     "format": "prettier --write .",
     "vitest": "node --env-file=.env ./node_modules/vitest/vitest.mjs",
     "test": "npx vitest run",
-    "test:watch": "node --env-file=.env vitest",
-    "prepare": "husky install"
+    "test:watch": "node --env-file=.env vitest"
   },
   "prisma/schema.prisma": [
     "npx prisma format"
