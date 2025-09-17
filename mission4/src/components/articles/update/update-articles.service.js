@@ -1,5 +1,5 @@
 import prisma from '../../../config/prisma.js';
-import { AppError } from '../../../utils/app-error.js';
+import CustomError from '../../../utils/custom-error.js';
 
 /**
  * 게시글 수정 서비스
@@ -11,7 +11,7 @@ import { AppError } from '../../../utils/app-error.js';
  * @param {string} params.content - 수정할 내용
  * @returns {Promise<Object>} - 수정된 게시글
  *
- * @throws {AppError} - 게시글 없음(404), 권한 없음(403)
+ * @throws {CuntomError} - 게시글 없음(404), 권한 없음(403)
  */
 export const updateArticleService = async ({ articleId, userId, title, content }) => {
   const article = await prisma.article.findUnique({
@@ -19,11 +19,11 @@ export const updateArticleService = async ({ articleId, userId, title, content }
   });
 
   if (!article) {
-    throw new AppError('Article not found', 404);
+    throw new CustomError('Article not found', 404);
   }
 
   if (article.authorId !== userId) {
-    throw new AppError('Forbidden', 403);
+    throw new CustomError('Forbidden', 403);
   }
 
   return prisma.article.update({

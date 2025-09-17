@@ -1,5 +1,5 @@
 import prisma from '../../../config/prisma.js';
-import { AppError } from '../../../utils/app-error.js';
+import CustomError from '../../../utils/custom-error.js';
 
 /** 로그인한 유저 정보 조회 */
 export const getUserService = async (userId) => {
@@ -13,7 +13,7 @@ export const getUserService = async (userId) => {
     },
   });
 
-  if (!user) throw new AppError(404, 'NOT_FOUND', '유저를 찾을 수 없습니다.');
+  if (!user) throw new CustomError(404, 'NOT_FOUND', '유저를 찾을 수 없습니다.');
 
   return user;
 };

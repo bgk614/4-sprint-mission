@@ -19,7 +19,7 @@ export const productRouter = express.Router();
 
 productRouter
   .route('/')
-  .get(authenticate, getProductsController) // 상품 목록 조회
+  .get(getProductsController) // 상품 목록 조회
   .post(authenticate, validate(createProductSchema), createProductController); // 상품 등록
 
 productRouter

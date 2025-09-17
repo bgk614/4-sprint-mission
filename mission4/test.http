@@ -1,6 +1,6 @@
 # 로그인 후 발급된 토큰
-@access-token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJpYXQiOjE3NTc4ODc2NDksImV4cCI6MTc1Nzg5MTI0OX0.sY32aRRGNgZ6PE_cZOyF0Ogw3Z1lzmTz3lInCNegr68
-@refresh-token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJpYXQiOjE3NTc4ODc2NDksImV4cCI6MTc1Nzg5MTI0OX0.sY32aRRGNgZ6PE_cZOyF0Ogw3Z1lzmTz3lInCNegr68
+@access-token = 
+@refresh-token = 
 
 # ================================
 # Auth & User
@@ -11,7 +11,7 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-  "email": "test@test2.com",
+  "email": "test@test1.com",
   "nickname": "tester",
   "password": "00001111"
 }
@@ -21,8 +21,8 @@ POST http://localhost:3000/sessions
 Content-Type: application/json
 
 {
-  "email": "test@test2.com",
-  "password": "00002222"
+  "email": "test@test1.com",
+  "password": "00001111"
 }
 
 ### 로그아웃
@@ -94,7 +94,7 @@ GET http://localhost:3000/products
 Authorization: Bearer {{access-token}}
 
 ### 상품 수정
-PATCH http://localhost:3000/products/88
+PATCH http://localhost:3000/products/1
 Authorization: Bearer {{access-token}}
 Content-Type: application/json
 
@@ -106,17 +106,16 @@ Content-Type: application/json
 }
 
 ### 상품 삭제
-DELETE http://localhost:3000/products/3
+DELETE http://localhost:3000/products/1
 Authorization: Bearer {{access-token}}
 
 ### 상품 댓글 등록
-POST http://localhost:3000/products/4/comments
+POST http://localhost:3000/products/1/comments
 Authorization: Bearer {{access-token}}
 Content-Type: application/json
 
 {
   "content": "상품댓글1"
-
 }
 
 ### 상품 좋아요 토글
@@ -142,7 +141,7 @@ Content-Type: application/json
 }
 
 ### 게시글 수정
-PATCH http://localhost:3000/articles/7
+PATCH http://localhost:3000/articles/1
 Authorization: Bearer {{access-token}}
 Content-Type: application/json
 
@@ -152,11 +151,11 @@ Content-Type: application/json
 }
 
 ### 게시글 삭제
-DELETE http://localhost:3000/articles/7
+DELETE http://localhost:3000/articles/1
 Authorization: Bearer {{access-token}}
 
 ### 게시글 댓글 등록
-POST http://localhost:3000/articles/7/comments
+POST http://localhost:3000/articles/1/comments
 Authorization: Bearer {{access-token}}
 Content-Type: application/json
 
@@ -165,7 +164,7 @@ Content-Type: application/json
 }
 
 ### 게시글 좋아요 토글
-POST http://localhost:3000/likes/articles/7
+POST http://localhost:3000/likes/articles/1
 Authorization: Bearer {{access-token}}
 
 # ================================
@@ -173,7 +172,7 @@ Authorization: Bearer {{access-token}}
 # ================================
 
 ### 댓글 수정
-PATCH http://localhost:3000/comments/6
+PATCH http://localhost:3000/comments/1
 Authorization: Bearer {{access-token}}
 Content-Type: application/json
 
@@ -182,5 +181,5 @@ Content-Type: application/json
 }
 
 ### 댓글 삭제
-DELETE http://localhost:3000/comments/6
+DELETE http://localhost:3000/comments/1
 Authorization: Bearer {{access-token}}

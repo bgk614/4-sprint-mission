@@ -1,25 +1,23 @@
 import prisma from '../../../config/prisma.js';
-import { AppError } from '../../../utils/app-error.js';
-import { ErrorCodes } from '../../../utils/error-codes.js';
-import { mapPrismaError } from '../../../utils/prisma-error-mapper.js';
+import CustomError from '../../../utils/custom-error.js';
 
 /**
  * 상품 수정 서비스
- * @param {number} productId - 수정할 상품 ID
- * @param {number} userId - 요청한 유저 ID
- * @param {object} data - 수정 데이터
- * @returns {Promise<object>} - 수정된 상품
+ * @param {number} productId
+ * @param {number} userId
+ * @param {object} data
+ * @returns {Promise<object>}
  */
 export const updateProductService = async (productId, userId, data) => {
   try {
     const product = await prisma.product.findUnique({ where: { id: productId } });
 
     if (!product) {
-      throw new AppError({ ...ErrorCodes.PRODUCT_NOT_FOUND, path: `/products/${productId}` });
+      throw new CustomError('Product not found', 404);
     }
 
     if (product.authorId !== userId) {
-      throw new AppError({ ...ErrorCodes.FORBIDDEN, path: `/products/${productId}` });
+      throw new CustomError('Forbidden', 403);
     }
 
     const updated = await prisma.product.update({
@@ -37,19 +35,12 @@ export const updateProductService = async (productId, userId, data) => {
 
     return updated;
   } catch (err) {
-    // Prisma 에러를 AppError로 변환
     if (err.code && err.code.startsWith('P')) {
-      throw mapPrismaError(err, `/products/${productId}`);
+      throw new CustomError('Database constraint error', 400);
     }
 
-    // 이미 AppError라면 그대로 throw
-    if (err instanceof AppError) throw err;
+    if (err instanceof CustomError) throw err;
 
-    // 그 외 알 수 없는 에러는 500으로
-    throw new AppError({
-      ...ErrorCodes.INTERNAL,
-      path: `/products/${productId}`,
-      details: { originalError: err.message, stack: err.stack },
-    });
+    throw new CustomError('Internal server error', 500);
   }
 };

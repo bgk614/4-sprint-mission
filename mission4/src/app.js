@@ -7,7 +7,7 @@ import { commentRouter } from './components/comments/comments.routes.js';
 import { likeRouter } from './components/likes/likes.routes.js';
 import { productRouter } from './components/products/products.routes.js';
 import { userRouter } from './components/users/users.routes.js';
-import { errorHandler } from './middlewares/error-handler.js';
+import errorHandler from './middlewares/error-handler.js';
 
 const app = express();
 

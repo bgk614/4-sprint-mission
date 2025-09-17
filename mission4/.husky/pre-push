@@ -1,4 +1,0 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-# 변경분만 빠르게
-npx vitest run --changed origin/main || exit 1

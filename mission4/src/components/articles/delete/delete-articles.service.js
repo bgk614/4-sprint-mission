@@ -1,5 +1,5 @@
 import prisma from '../../../config/prisma.js';
-import { AppError } from '../../../utils/app-error.js';
+import CustomError from '../../../utils/custom-error.js';
 
 /**
  * 게시글 삭제 서비스
@@ -9,17 +9,17 @@ import { AppError } from '../../../utils/app-error.js';
  * @param {number} params.userId - 요청한 사용자 ID
  * @returns {Promise<void>}
  *
- * @throws {AppError} - 게시글 없음(404), 권한 없음(403)
+ * @throws {CustomError} - 게시글 없음(404), 권한 없음(403)
  */
+
 export const deleteArticleService = async ({ articleId, userId }) => {
   const article = await prisma.article.findUnique({ where: { id: articleId } });
 
   if (!article) {
-    throw new AppError('Article not found', 404);
+    throw new CustomError('Article not found', 404);
   }
-
   if (article.authorId !== userId) {
-    throw new AppError('Forbidden', 403);
+    throw new CustomError('Forbidden', 403);
   }
 
   await prisma.article.delete({

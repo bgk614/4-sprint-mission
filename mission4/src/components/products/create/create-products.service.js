@@ -1,5 +1,5 @@
 import prisma from '../../../config/prisma.js';
-import { AppError } from '../../../utils/app-error.js';
+import CustomError from '../../../utils/custom-error.js';
 
 /**
  * 상품 생성
@@ -8,18 +8,29 @@ import { AppError } from '../../../utils/app-error.js';
  */
 
 export async function createProductService(input) {
-  try {
-    return await prisma.product.create({
-      data: {
-        name: input.name,
-        description: input.description,
-        price: input.price,
-        tags: input.tags,
-        author: { connect: { id: input.authorId } },
-      },
-      select: { id: true, name: true, description: true, price: true, tags: true, authorId: true },
-    });
-  } catch {
-    throw new AppError(404, 'USER_NOT_FOUND', '해당 사용자가 존재하지 않습니다.');
+  if (!input.name?.trim()) {
+    throw new CustomError('Product name is required', 400);
   }
+
+  if (input.price <= 0) {
+    throw new CustomError('Product price must be greater than zero', 400);
+  }
+
+  return prisma.product.create({
+    data: {
+      name: input.name,
+      description: input.description,
+      price: input.price,
+      tags: input.tags,
+      author: { connect: { id: input.authorId } },
+    },
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      price: true,
+      tags: true,
+      authorId: true,
+    },
+  });
 }

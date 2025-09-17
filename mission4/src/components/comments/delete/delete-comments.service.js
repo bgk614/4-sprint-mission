@@ -1,5 +1,5 @@
 import prisma from '../../../config/prisma.js';
-import { AppError } from '../../../utils/app-error.js';
+import CustomError from '../../../utils/custom-error.js';
 
 /**
  * 댓글 삭제 서비스
@@ -9,13 +9,13 @@ import { AppError } from '../../../utils/app-error.js';
  * @param {number} params.userId - 요청한 사용자 ID
  * @returns {Promise<void>}
  *
- * @throws {AppError} - 게시글 없음(404), 권한 없음(403)
+ * @throws {CustomError} - 게시글 없음(404), 권한 없음(403)
  */
 
 export const deleteCommentService = async ({ commentId, userId }) => {
   const comment = await prisma.comment.findUnique({ where: { id: commentId } });
-  if (!comment) throw new AppError('Comment not found', 404);
-  if (comment.authorId !== userId) throw new AppError('Forbidden', '본인 댓글만 삭제할 수 있습니다.', 403);
+  if (!comment) throw new CustomError('Comment not found', 404);
+  if (comment.authorId !== userId) throw new CustomError('Forbidden', '본인 댓글만 삭제할 수 있습니다.', 403);
 
   return await prisma.comment.delete({ where: { id: commentId } });
 };

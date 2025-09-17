@@ -17,7 +17,7 @@ export const articleRouter = express.Router();
 articleRouter
   .route('/')
   .post(authenticate, validate(createArticleSchema), createArticleController) // 게시글 등록
-  .get(authenticate, getArticlesController); // 게시글 조회
+  .get(getArticlesController); // 게시글 조회
 
 articleRouter
   .route('/:articleId')

@@ -1,34 +1,74 @@
-// middlewares/error-handler.js
-import { AppError } from '../utils/app-error.js';
-import { ErrorCodes } from '../utils/error-codes.js';
-import { mapPrismaError } from '../utils/prisma-error-mapper.js';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
-export const errorHandler = (err, req, res, _next) => {
-  // AppError로 통일
-  const mapped = mapPrismaError(err, req.originalUrl);
-  const appError =
-    mapped instanceof AppError
-      ? mapped
-      : err instanceof AppError
-        ? err
-        : new AppError({
-            ...ErrorCodes.INTERNAL,
-            path: req.originalUrl,
-            details: { originalError: err.message, stack: err.stack },
-          });
+import CustomError from '../utils/custom-error.js';
 
-  // 내부 로깅
-  console.error({
-    code: appError.code,
-    message: appError.message,
-    path: appError.path,
-    details: appError.details,
-  });
-
-  // 클라이언트 응답
-  res.status(appError.status).json({
-    code: appError.code,
-    message: appError.message,
-    path: appError.path,
-  });
+const handlePrismaError = (err) => {
+  switch (err.code) {
+    case 'P2002':
+      return new CustomError(`Duplicate field value: ${err.meta.target}`, 400);
+    case 'P2014':
+      return new CustomError(`Invalid ID: ${err.meta.target}`, 400);
+    case 'P2003':
+      return new CustomError(`Invalid input data: ${err.meta.target}`, 400);
+    default:
+      return new CustomError(`Something went wrong: ${err.message}`, 500);
+  }
 };
+
+const handleJWTError = () => new CustomError('Invalid token, please login again', 400);
+const handleJWTExpiredError = () => new CustomError('Token has expired, please login again', 400);
+
+const sendErrorDev = (err, req, res) => {
+  if (req.originalUrl.startsWith('/api')) {
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message,
+      stack: err.stack,
+      errors: err,
+    });
+  } else {
+    res.status(err.statusCode).render('error', { title: 'Something went wrong!', msg: err.message });
+  }
+};
+
+const sendErrorProd = (err, req, res) => {
+  if (req.originalUrl.startsWith('/api')) {
+    if (err.isOperational) return res.status(err.statusCode).json({ status: err.status, message: err.message });
+
+    console.error('ERROR 💥', err);
+    return res.status(500).json({ status: 'error', message: 'Please try again later' });
+  }
+
+  if (err.isOperational) return res.status(err.statusCode).json({ status: err.status, message: err.message });
+
+  return res.status(500).json({ status: 'error', message: 'Something went wrong' });
+};
+
+const errorHandler = (err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
+  err.status = err.status || 'error';
+
+  if (process.env.NODE_ENV === 'development') {
+    sendErrorDev(err, req, res);
+  } else {
+    let error = err;
+
+    if (err instanceof PrismaClientKnownRequestError) {
+      const newError = handlePrismaError(err);
+      newError.stack = err.stack;
+      error = newError;
+    } else if (error.name === 'JsonWebTokenError') {
+      const newError = handleJWTError();
+      newError.stack = err.stack;
+      error = newError;
+    } else if (error.name === 'TokenExpiredError') {
+      const newError = handleJWTExpiredError();
+      newError.stack = err.stack;
+      error = newError;
+    }
+
+    sendErrorProd(error, req, res);
+  }
+};
+
+export default errorHandler;

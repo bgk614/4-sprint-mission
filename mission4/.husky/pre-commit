@@ -1,3 +1,10 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
-npx lint-staged
+
+# 변경된 파일만 lint-staged 적용
+echo "🔹 Running lint-staged on changed files..."
+npx lint-staged || exit 1
+
+# 변경된 파일만 테스트 실행
+echo "🔹 Running tests on changed files..."
+npx vitest run --changed origin/main || exit 1
