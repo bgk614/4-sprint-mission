@@ -87,3 +87,5 @@ model Like {
   @@unique([authorId, articleId])
   @@unique([authorId, productId])
 }
+
+// TODO: RefreshToken 모델 정의 추가

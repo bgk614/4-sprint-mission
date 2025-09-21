@@ -3,3 +3,5 @@ node_modules
 /src/generated/prisma
 .vscode
 .DS_Store
+dist
+tsconfig.tsbuildinfo

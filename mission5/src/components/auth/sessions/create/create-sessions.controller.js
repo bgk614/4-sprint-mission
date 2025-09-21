@@ -1,6 +1,7 @@
 import { ACCESS_TOKEN_COOKIE_NAME, REFRESH_TOKEN_COOKIE_NAME } from '../../../../config/constants.js';
 import { createSessionService } from './create-sessions.service.js';
 
+// TODO: 로그인시 리프레시 토큰 저장
 export async function createSessionController(req, res, next) {
   try {
     const { email, password } = req.body;

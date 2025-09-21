@@ -6,7 +6,7 @@ import globals from 'globals';
 
 export default [
   {
-    ignores: ['node_modules/**', 'prisma/**', 'src/generated/**'],
+    ignores: ['node_modules/**', 'prisma/**', 'src/generated/**', 'dist'],
   },
   js.configs.recommended,
   {

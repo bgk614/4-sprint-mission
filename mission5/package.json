@@ -1,22 +1,19 @@
 {
-  "name": "mission4",
+  "name": "mission5",
   "version": "1.0.0",
   "main": "index.js",
   "keywords": [],
   "author": "Bogyeong Kim",
   "license": "ISC",
-  "description": "Codeit BootCamp 2025 Node04 Sprint Mission 4 20250903 - 20250914",
+  "description": "Codeit BootCamp 2025 Node04 Sprint Mission 5 20250911 - 20250921",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --env-file=.env src/index.js",
-    "start": "node --env-file=.env src/index.js",
+    "dev": "tsx watch -r tsconfig-paths/register src/index.ts",
+    "start": "node --env-file=.env dist/index.js",
+    "build": "tsc && tsc-alias",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
-    "vitest": "node --env-file=.env ./node_modules/vitest/vitest.mjs",
-    "test": "npx vitest run",
-    "test:watch": "node --env-file=.env vitest",
-    "prepare": "husky install"
+    "format": "prettier --write ."
   },
   "prisma/schema.prisma": [
     "npx prisma format"
@@ -24,17 +21,25 @@
   "dependencies": {
     "@prisma/client": "^6.15.0",
     "bcrypt": "^6.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "nodemon": "^3.1.10",
     "prisma": "^6.15.0",
-    "zod": "^4.1.5"
+    "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.5.1",
     "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "prettier": "^3.6.2"
+    "prettier": "^3.6.2",
+    "tsc-alias": "^1.8.16",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
   }
 }
