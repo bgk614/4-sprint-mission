@@ -1,5 +1,4 @@
 import express from 'express';
-
 import { refreshTokenController } from './tokens.controller.js';
 
 export const tokenRouter = express.Router();

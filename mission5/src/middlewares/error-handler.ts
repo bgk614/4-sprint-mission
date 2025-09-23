@@ -1,68 +1,74 @@
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { AppError } from '@utils/app-error.js';
 import type { NextFunction, Request, Response } from 'express';
 
-interface AppError extends Error {
-  statusCode?: number;
-  isOperational?: boolean;
-}
-
+// Prisma 에러 처리
 const handlePrismaError = (err: PrismaClientKnownRequestError): AppError => {
-  const error: AppError = new Error();
-  error.isOperational = true;
-
   switch (err.code) {
     case 'P2002':
-      error.message = `Duplicate field value: ${err.meta?.target}`;
-      error.statusCode = 400;
-      break;
+      return new AppError(`Duplicate field value: ${err.meta?.target}`, 400);
     case 'P2014':
-      error.message = `Invalid ID: ${err.meta?.target}`;
-      error.statusCode = 400;
-      break;
+      return new AppError(`Invalid ID: ${err.meta?.target}`, 400);
     case 'P2003':
-      error.message = `Invalid input data: ${err.meta?.target}`;
-      error.statusCode = 400;
-      break;
+      return new AppError(`Invalid input data: ${err.meta?.target}`, 400);
     default:
-      error.message = `Something went wrong: ${err.message}`;
-      error.statusCode = 500;
+      return new AppError(`Something went wrong: ${err.message}`, 500, false);
+  }
+};
+
+// JWT 에러 처리
+const handleJWTError = () =>
+  new AppError('Invalid token, please login again', 401);
+const handleJWTExpiredError = () =>
+  new AppError('Token has expired, please login again', 401);
+
+// Express 전역 에러 핸들러
+const errorHandler = (
+  err: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  let error = err;
+
+  // Prisma 에러
+  if (err instanceof PrismaClientKnownRequestError) {
+    error = handlePrismaError(err);
   }
 
-  return error;
-};
+  // JWT 에러
+  if (err.name === 'JsonWebTokenError') {
+    error = handleJWTError();
+  }
+  if (err.name === 'TokenExpiredError') {
+    error = handleJWTExpiredError();
+  }
 
-const handleJWTError = (): AppError => {
-  const err: AppError = new Error('Invalid token, please login again');
-  err.statusCode = 400;
-  err.isOperational = true;
-  return err;
-};
-
-const handleJWTExpiredError = (): AppError => {
-  const err: AppError = new Error('Token has expired, please login again');
-  err.statusCode = 400;
-  err.isOperational = true;
-  return err;
-};
-
-const errorHandler = (err: AppError, req: Request, res: Response, next: NextFunction) => {
-  err.statusCode = err.statusCode || 500;
-  err.isOperational = err.isOperational ?? false;
+  const appError =
+    error instanceof AppError
+      ? error
+      : new AppError('Unexpected error', 500, false);
 
   if (process.env.NODE_ENV === 'development') {
-    res.status(err.statusCode).json({
-      status: err.isOperational ? 'error' : 'fail',
-      message: err.message,
-      stack: err.stack,
+    return res.status(appError.statusCode).json({
+      status: appError.isOperational ? 'fail' : 'error',
+      message: appError.message,
+      stack: appError.stack,
     });
-  } else {
-    if (err.isOperational) {
-      res.status(err.statusCode).json({ status: 'error', message: err.message });
-    } else {
-      console.error('ERROR', err);
-      res.status(500).json({ status: 'error', message: 'Something went wrong' });
-    }
   }
+
+  // production
+  if (appError.isOperational) {
+    return res.status(appError.statusCode).json({
+      status: 'fail',
+      message: appError.message,
+    });
+  }
+
+  console.error('ERROR 💥', error);
+  return res
+    .status(500)
+    .json({ status: 'error', message: 'Something went wrong' });
 };
 
 export default errorHandler;

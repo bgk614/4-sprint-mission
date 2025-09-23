@@ -1,3 +1,4 @@
+import { UnauthorizedError } from '@utils/app-error.js';
 import type { NextFunction, Request, Response } from 'express';
 import prisma from '../config/prisma.js';
 import { verifyAccessToken } from '../config/token.js';
@@ -28,7 +29,12 @@ export const authenticate = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    let token: string | undefined;
+    let token = req.cookies?.accessToken;
+
+    if (!token) {
+      const authHeader = req.headers.authorization;
+      if (authHeader?.startsWith('Bearer ')) token = authHeader.split(' ')[1];
+    }
 
     const authHeader = req.headers.authorization;
     if (authHeader?.startsWith('Bearer ')) token = authHeader.split(' ')[1];
@@ -36,23 +42,22 @@ export const authenticate = async (
     if (!token && req.cookies?.accessToken) token = req.cookies.accessToken;
 
     if (!token) {
-      res.status(401).json({ message: '토큰이 필요합니다.' });
-      return;
+      throw new UnauthorizedError('토큰이 필요합니다.');
     }
 
     const payload = verifyAccessToken(token) as JwtPayload;
+
     const user = await prisma.user.findUnique({
       where: { id: payload.userId },
     });
 
     if (!user) {
-      res.status(401).json({ message: '유효하지 않은 토큰입니다.' });
-      return;
+      throw new UnauthorizedError('유효하지 않은 토큰입니다.');
     }
 
     req.user = user;
     next();
-  } catch (err: any) {
-    res.status(401).json({ message: '인증 실패', error: err.message });
+  } catch (err) {
+    next(err);
   }
 };

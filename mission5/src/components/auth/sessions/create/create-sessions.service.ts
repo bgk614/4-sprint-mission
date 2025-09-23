@@ -1,9 +1,9 @@
+import prisma from '@config/prisma.js';
 import bcrypt from 'bcrypt';
 
-import prisma from '../../../../config/prisma.js';
 import { generateTokens } from '../../../../config/token.js';
 
-export async function createSessionService(email, password) {
+export async function createSessionService(email: string, password: string) {
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) throw new Error('Invalid credentials');
 
