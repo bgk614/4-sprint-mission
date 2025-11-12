@@ -17,7 +17,7 @@ class ProductController {
 
       const params: UpdatePriceParams = { userId, productId, price };
 
-      const result = await productService.updatePrice(params);
+      await productService.updatePrice(params);
       res.status(STATUS_CODE.SUCCESS).json({ message: MESSAGE.successUpdatePrice, productId, newPrice: price });
     } catch (err) {
       next(err);

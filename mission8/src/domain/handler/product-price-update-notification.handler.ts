@@ -1,7 +1,6 @@
-// handlers/price-update-notification.handler.ts
 import { Server } from 'socket.io';
 
-import { NotificationTypeEnum } from '../../../generated/prisma/enums.js';
+import { NotificationTypeEnum } from '../../../generated/prisma/client.js';
 import type { EventHandler } from '../../utils/event-bus.js';
 import { notificationRepository } from '../notification/notification.repository.js';
 import type { PriceUpdateEvent } from '../product/product.js';
